@@ -35,3 +35,13 @@ class Applicant(Base):
     email = Column(String, nullable=False, unique=True)
     resume = Column(Text)
     applications = relationship('Application', back_populates='applicant', cascade="all, delete")
+
+
+class Application(Base):
+    __tablename__ = 'applications'
+    id = Column(Integer, primary_key=True)
+    job_id = Column(Integer, ForeignKey('job_listings.id'))
+    applicant_id = Column(Integer, ForeignKey('applicants.id'))
+    status = Column(String, default='Pending')
+    job = relationship('JobListing')
+    applicant = relationship('Applicant', back_populates='applications')
