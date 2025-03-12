@@ -16,3 +16,22 @@ class Employer(Base):
     name = Column(String, nullable=False)
     jobs = relationship('JobListing', back_populates='employer', cascade="all, delete")
 
+class JobListing(Base):
+    __tablename__ = 'job_listings'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    employer_id = Column(Integer, ForeignKey('employers.id'))
+    description = Column(Text, nullable=False)
+    qualifications = Column(Text, nullable=False)
+    salary_range = Column(String)
+    benefits = Column(Text)
+    deadline = Column(Date)
+    employer = relationship('Employer', back_populates='jobs')
+
+class Applicant(Base):
+    __tablename__ = 'applicants'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
+    resume = Column(Text)
+    applications = relationship('Application', back_populates='applicant', cascade="all, delete")
