@@ -7,6 +7,13 @@ from job_board_ats.lib.cli import (
     apply, update_application_status, delete_application, display_all_applications, init_db_command,
     schedule_interview_command, submit_feedback_command
 )
+from job_board_ats.lib.models import Base, engine
+@click.command()
+def init_db():
+    """Initialize the database"""
+    print("Initializing database...")
+    Base.metadata.create_all(bind=engine)
+    print("Database initialized successfully!")
 
 
 @click.group()
@@ -16,6 +23,7 @@ def cli():
 
 # Register Commands
 cli.add_command(init_db_command)
+cli.add_command(init_db)
 cli.add_command(create_employer)
 cli.add_command(delete_employer)
 cli.add_command(display_all_employers)

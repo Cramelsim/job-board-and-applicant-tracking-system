@@ -28,18 +28,21 @@ git clone https://github.com/yourusername/job-board-application-tracking-system.
 cd job-board-application-tracking-system
 ```
 
-
 ## Install Dependencies
 1. Create a virtual environment and install the required dependencies.
+```bash
 pipenv install && pipenv shell 
-pip install -r requirements.txt
-2. Initialize Database
+```
+## Initialize Database
 To initialize the SQLite database:
-bashCopypython main.py init-db
+```bash
+python main.py init-db
+```
 This will create the necessary tables in the job_board.db SQLite database.
 
 ## Usage
 The project is controlled via a command-line interface (CLI). Use the following commands to interact with the system.
+
 ## Employer Management
 ### Create an employer:
 ```bash

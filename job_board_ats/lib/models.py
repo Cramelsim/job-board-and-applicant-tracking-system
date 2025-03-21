@@ -63,7 +63,7 @@ class Interview(Base):
     applicant_id = Column(Integer, ForeignKey('applicants.id'), nullable=False)
     employer_id = Column(Integer, ForeignKey('employers.id'), nullable=False)
     interview_time = Column(DateTime, nullable=False)
-    location = Column(String, nullable=True)  # e.g., Zoom link or office address
+    location = Column(String, nullable=True)  # Zoom link or office address
     status = Column(String, default="Scheduled")  # "Scheduled", "Completed", "Cancelled"
     
     applicant = relationship("Applicant", back_populates="interviews")
@@ -78,7 +78,7 @@ class InterviewFeedback(Base):
     interview_id = Column(Integer, ForeignKey('interviews.id'), nullable=False)
     interviewer_name = Column(String, nullable=False)
     feedback = Column(String, nullable=False)
-    rating = Column(Integer)  # e.g., 1-5 stars
+    rating = Column(Integer)  #1-5 stars
     
     interview = relationship("Interview", back_populates="feedbacks")
     
