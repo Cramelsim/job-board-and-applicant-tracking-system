@@ -24,79 +24,137 @@ Before running the application, make sure you have the following dependencies in
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/job-board-ats.git
-cd job-board-ats
-bashCopygit clone https://github.com/yourusername/job-board-ats.git
-cd job-board-ats
+git clone https://github.com/yourusername/job-board-application-tracking-system.git
+cd job-board-application-tracking-system
+```
+
 
 ## Install Dependencies
-Create a virtual environment and install the required dependencies.
-bashCopypython3 -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+1. Create a virtual environment and install the required dependencies.
+pipenv install && pipenv shell 
 pip install -r requirements.txt
-Initialize Database
+2. Initialize Database
 To initialize the SQLite database:
 bashCopypython main.py init-db
 This will create the necessary tables in the job_board.db SQLite database.
 
 ## Usage
 The project is controlled via a command-line interface (CLI). Use the following commands to interact with the system.
-Employer Management
-Create an employer:
-bashCopypython main.py create-employer "Company Name"
-Delete an employer:
-bashCopypython main.py delete-employer 1
-Display all employers:
-bashCopypython main.py display-all-employers
-Find an employer by name:
-bashCopypython main.py find-employer-by-name "Company Name"
-Job Listings
-Post a job:
-bashCopypython main.py post-job "Job Title" 1 "Job Description" "Qualifications" "Salary Range" "Benefits" "2025-03-30"
-Delete a job:
-bashCopypython main.py delete-job 1
-Display all jobs:
-bashCopypython main.py display-all-jobs
-Applicant Management
-Create an applicant:
-bashCopypython main.py create-applicant "John Doe" "john@example.com" "resume.pdf"
-Delete an applicant:
-bashCopypython main.py delete-applicant 1
-Display all applicants:
-bashCopypython main.py display-all-applicants
-Applications
-Apply for a job:
-bashCopypython main.py apply 1 1
-Update application status:
-bashCopypython main.py update-application-status 1 "Accepted"
-Delete an application:
-bashCopypython main.py delete-application 1
-Display all applications:
-bashCopypython main.py display-all-applications
-Interview Scheduling
-Schedule an interview:
-bashCopypython main.py schedule-interview-command 1 1 "2025-03-15 10:00:00" "Company Office"
-Email Communication
-The system sends email notifications when an interview is scheduled, using the smtplib module. Make sure you have the email sending functionality configured properly in the system. The send_email function should be integrated with your email service (like Gmail, Outlook, etc.).
+## Employer Management
+### Create an employer:
+```bash
+python main.py create-employer "Company Name"
+```
+
+### Delete an employer:
+```bash
+python main.py delete-employer "employer-id"
+```
+
+### Display all employers:
+```bash
+python main.py display-all-employers
+```
+
+### Find an employer by name:
+```bash
+python main.py find-employer-by-name "Company Name"
+```
+
+## Job Listings
+
+### Post a job:
+```bash
+python main.py post-job "Job Title" "job-id" "Job Description" "Qualifications" "Salary Range" "Benefits" "2025-03-30"
+```
+
+### Delete a job:
+```bash
+python main.py delete-job "job-id"
+```
+
+### Display all jobs:
+```bash
+python main.py display-all-jobs
+```
+
+## Applicant Management
+
+### Create an applicant:
+```bash
+python main.py create-applicant "John Doe" "john@example.com" "resume.pdf"
+```
+
+### Delete an applicant:
+```bash
+python main.py delete-applicant "applicant-id"
+```
+
+### Display all applicants:
+```bash
+python main.py display-all-applicants
+```
+
+## Applications
+
+### Apply for a job:
+```bash
+python main.py apply "job-id" "applicant-id"
+```
+
+### Update application status:
+```bash
+python main.py update-application-status "application-id" "Accepted"
+```
+
+### Delete an application:
+```bash
+python main.py delete-application "application-id"
+```
+
+### Display all applications:
+```bash
+python main.py display-all-applications
+```
+
+## Interview Scheduling
+
+### Schedule an interview:
+```bash
+python main.py schedule-interview-command "applicant-id" "employer-id" "2025-03-15 10:00:00" "Company Office"
+```
+
+## Email Communication
+The system sends email notifications when an interview is scheduled, using the `smtplib` module.
 
 ## Database Schema
-The system uses an SQLite database (job_board.db) with the following tables:
+The system uses an SQLite database (`job_board.db`) with the following tables:
 
-Employers: Contains the employer's information.
-Job Listings: Contains job postings, linked to employers.
-Applicants: Contains applicant information.
-Applications: Contains job applications submitted by applicants.
-Interviews: Contains interview schedules.
-Interview Feedback: Contains feedback submitted after interviews.
+- **Employers**: Contains employer information.
+- **Job Listings**: Contains job postings, linked to employers.
+- **Applicants**: Contains applicant information.
+- **Applications**: Contains job applications submitted by applicants.
+- **Interviews**: Contains interview schedules.
+- **Interview Feedback**: Contains feedback submitted after interviews.
 
 ## Development
 If you would like to contribute to the project, please follow these steps:
 
 1. Fork the repository.
-2. Create a new branch (git checkout -b feature-name).
-3. Commit your changes (git commit -am 'Add new feature').
-4 .Push to the branch (git push origin feature-name).
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -am 'Add new feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature-name
+   ```
 5. Create a new Pull Request.
 
-##License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## License
+This project is licensed under the MIT License.
+

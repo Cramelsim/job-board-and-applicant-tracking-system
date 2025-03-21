@@ -2,7 +2,7 @@
 
 import click
 from job_board_ats.lib.models import Session, Employer, JobListing, Applicant, Application, Interview, InterviewFeedback
-import ipdb  # for debugging purposes
+import ipdb 
 from job_board_ats.lib.models import init_db 
 from datetime import datetime
 
@@ -123,8 +123,6 @@ def display_all_jobs():
     else:
         click.echo("No jobs found.")
 
-
-   
 
 # Command to create an applicant
 @click.command()
@@ -249,7 +247,7 @@ def schedule_interview_command(applicant_id, employer_id, interview_time, locati
         session.add(interview)
         session.commit()  # Commit to the database
 
-        # Send a calendar invite (this function can be expanded with actual calendar API integration)
+        # Send a calendar invite
         send_calendar_invite(interview)
 
         click.echo(f"Interview scheduled for Applicant {applicant_id} with Employer {employer_id} at {interview_time}.")
@@ -261,7 +259,7 @@ def schedule_interview_command(applicant_id, employer_id, interview_time, locati
 
 
 def send_calendar_invite(interview):
-    # Code to send calendar invite (can integrate Google Calendar API or other services)
+    # Code to send calendar invite
     click.echo(f"Sending calendar invite for interview scheduled on {interview.interview_time}.")
 
 
@@ -291,6 +289,17 @@ def submit_feedback_command(interview_id, interviewer_name, feedback, rating):
         click.echo(f"Error submitting feedback: {e}")
     finally:
         session.close()  # Close the session
+import smtplib
+
+def send_email(subject, message, recipient):
+    sender_email = "your-email@example.com"
+    password = "your-password"
+
+    with smtplib.SMTP("smtp.example.com", 587) as server:
+        server.starttls()
+        server.login(sender_email, password)
+        email_message = f"Subject: {subject}\n\n{message}"
+        server.sendmail(sender_email, recipient, email_message)
 
 
 # Adding commands to the CLI
